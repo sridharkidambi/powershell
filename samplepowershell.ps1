@@ -16,4 +16,22 @@ $files | Where-Object {$_.Length -gt 4}
 foreach($file  in $files){
    $file.Name
 }
-1..100 |foreach{"*"*$_}
+1..10 |foreach{"*"*$_}
+
+# arrays
+$strcomputers =@("sccc","dsdsdfgfiuisd","rsbfkfuiwehifu")
+$strcomputers | Where-Object  {$_.Equals("sccc")}  
+# $strcomputers |Get-Member       
+$strcomputers.Length  
+$strcomputers | foreach{$_ +" "+$_.Length}     
+$employeeNumbers=@{"name"="Sridhar Kidambi";"Age"=34}    
+$employeeNumbers   
+$files |Format-Wide   -Property Length 
+$files | select Name      
+$files |Format-Table   -Property path  
+
+Get-Process | Sort-Object ProcessName  | Group-Object Name  | Out-File "results.txt"         
+
+Get-Process | ConvertTo-Html |Out-File "result.html"    
+# open in browser
+Invoke-Expression ./result.htm                                                                                                                                                                                                                                                                                                                                                             

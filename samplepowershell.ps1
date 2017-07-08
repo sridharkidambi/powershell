@@ -36,9 +36,49 @@ Get-Process | ConvertTo-Html |Out-File "result.html"
 # Invoke-Expression ./result.htm 
 # Invoke-Expression  ./Census1000.csv   
 $tablecsv= Import-Csv ./Census1000.csv
-$tablecsv[1]
-$response = Invoke-WebRequest -Uri "www.microsoft.com" 
+$tablecsv[1] | Format-Table
+$response = Invoke-WebRequest -Uri "www.google.com" 
+echo "itesm"
 $response.items
-Invoke-Expression ./Census1000.csv
+echo "itesm"
+# try{
 
+# $myinvoke= Invoke-Expression  -Command  & ./Census1000.csv
+# } catch{
+#     $_
+# }
 
+$tablecsv |Get-Member
+
+$tablecsv[0].name
+echo "desc name top 1"
+$tablecsv | Sort-Object -Property name -Descending |Format-Table -Property name,rank
+($tablecsv | Sort-Object -Property name -Descending)[0].name
+$tablecsv | Sort-Object -Property name -Descending | select -First 1 name
+# highest hispanic
+$tablecsv | foreach{if($_.pcthispanic -gt $highest.pcthispanic){$highest=$_}}
+
+$highest.pcthispanic
+# functions:
+
+function Do-Something() {
+    1+2
+}
+ Do-Something;
+
+ function Do-AddSomething() {
+
+     Param([int] $n1,[int] $n2)
+   return ($n1+$n2);
+}
+ $addresult=Do-AddSomething -n1 5 -n2 9
+ echo "print add results:"
+ $addresult
+
+echo "space"
+param([string] $dir="/usr/local/share/dotnet" )
+function  findsumdirectory ($dir) {
+$dirresult =Get-ChildItem $dir -Recurse | Measure-Object -Property Length -Sum
+return ([math]::Round(($dirresult).sum/1GB,2));
+}
+(findsumdirectory -dir  $dir).ToDouble()

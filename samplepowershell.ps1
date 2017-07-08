@@ -5,7 +5,6 @@ $a=1+2
 $files=dir
 $files[0].Name
 echo "iam sk" 
-
 # $files[1] | Get-Member
 $files |Sort-Object -Property CreationTime
 $files |Sort-Object -Descending Name
@@ -34,4 +33,12 @@ Get-Process | Sort-Object ProcessName  | Group-Object Name  | Out-File "results.
 
 Get-Process | ConvertTo-Html |Out-File "result.html"    
 # open in browser
-Invoke-Expression ./result.htm                                                                                                                                                                                                                                                                                                                                                             
+# Invoke-Expression ./result.htm 
+# Invoke-Expression  ./Census1000.csv   
+$tablecsv= Import-Csv ./Census1000.csv
+$tablecsv[1]
+$response = Invoke-WebRequest -Uri "www.microsoft.com" 
+$response.items
+Invoke-Expression ./Census1000.csv
+
+
